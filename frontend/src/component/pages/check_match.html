@@ -1,11 +1,23 @@
-<!-- File: check-match.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Check Match - Allsport Hub</title>
   <link rel="stylesheet" href="styles/styles.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,25 +33,43 @@
     </nav>
   </header>
 
-  <section id="check-match">
-    <h2>Check Scheduled Matches</h2>
-    <p>List of your upcoming or registered matches will be displayed here.</p>
-    <!-- Add dynamic table or list from backend here -->
+  <section>
+    <h2>Registered Teams & Match Stats</h2>
+    <table id="matchTable">
+      <thead>
+        <tr>
+          <th>Team Name</th>
+          <th>Sport</th>
+          <th>Matches Played</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be added dynamically -->
+      </tbody>
+    </table>
   </section>
 
-  <button id="chat-button">💬</button>
-<div id="chat-box">
-  <p><strong>Support:</strong> How can we help you?</p>
-  <textarea rows="3" style="width: 100%;" placeholder="Type your message..."></textarea>
-  <button style="margin-top: 10px; width: 100%;">Send</button>
-</div>
+  <script>
+    // Dummy logic to simulate team registration entry - should be replaced by backend storage in production
+    const teamData = JSON.parse(localStorage.getItem('registeredTeams')) || [];
 
-  <script src="scripts/main.js">
-     const chatButton = document.getElementById('chat-button');
-  const chatBox = document.getElementById('chat-box');
-  chatButton.onclick = () => {
-    chatBox.style.display = chatBox.style.display === 'none' || chatBox.style.display === '' ? 'block' : 'none';
-  };
+    const tbody = document.getElementById('matchTable').querySelector('tbody');
+
+    if (teamData.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4">No teams registered yet.</td></tr>';
+    } else {
+      teamData.forEach(team => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${team.name}</td>
+          <td>${team.sport}</td>
+          <td>0</td>
+          <td>0</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
   </script>
 </body>
 </html>

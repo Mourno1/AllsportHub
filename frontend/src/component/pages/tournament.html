@@ -1,11 +1,13 @@
-<!-- File: tournament.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tournament Registration - Allsport Hub</title>
   <link rel="stylesheet" href="styles/styles.css">
+  <style>
+    .sport-form { display: none; margin-top: 15px; }
+    .payment-section { margin-top: 20px; }
+  </style>
 </head>
 <body>
   <header>
@@ -23,34 +25,102 @@
 
   <section class="login-container">
     <h2>Register for Tournament</h2>
-    <form action="/tournament-register" method="post">
+    <form id="tournamentForm" action="check_match.html" onsubmit="return handleSubmit()">
       <label>Choose Sport:</label>
-      <select name="sport">
+      <select name="sport" id="sportSelect" required onchange="showSportForm()">
+        <option value="">-- Select Sport --</option>
         <option value="football">Football</option>
         <option value="basketball">Basketball</option>
         <option value="cricket">Cricket</option>
       </select>
+
+      <div id="football" class="sport-form">
+        <h3>Football Info</h3>
+        <input type="text" placeholder="Full Name" required>
+        <input type="date" placeholder="Date of Birth" required>
+        <select required>
+          <option value="">Sex</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+        <input type="text" placeholder="Nationality" required>
+        <input type="text" placeholder="Address" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="email" placeholder="Email" required>
+        <input type="file" required>
+        <label>Preferred Foot:</label>
+        <select required>
+          <option>Droit</option><option>Gauche</option><option>Ambidextre</option>
+        </select>
+        <label>Poste:</label>
+        <select required>
+          <option>Gardien</option><option>Défenseur</option><option>Milieu</option><option>Attaquant</option>
+        </select>
+      </div>
+
+      <div id="basketball" class="sport-form">
+        <h3>Basketball Info</h3>
+        <!-- Similar fields tailored for basketball -->
+      </div>
+
+      <div id="cricket" class="sport-form">
+        <h3>Cricket Info</h3>
+        <!-- Similar fields tailored for cricket -->
+      </div>
+
+      <div class="payment-section">
+        <p><strong>Registration Fee: ₹100</strong></p>
+        <label>Select Payment Method:</label>
+        <select id="paymentMethod" required>
+          <option value="">-- Select Payment Method --</option>
+          <option value="phonepe">PhonePe</option>
+          <option value="gpay">Google Pay</option>
+          <option value="paytm">Paytm</option>
+        </select>
+        <button type="button" onclick="initiatePayment()">Pay Now</button>
+        <p id="paymentStatus" style="color: green; display: none;">Payment Successful ✅</p>
+      </div>
+
       <input type="text" name="teamName" placeholder="Team Name" required>
-      <textarea name="playerDetails" placeholder="Enter player details (name, age, position...)" required></textarea>
-      <input type="text" name="payment" placeholder="Payment Info">
-      <button type="submit">Submit Registration</button>
+      <textarea name="playerDetails" placeholder="Enter player details..." required></textarea>
+      <input type="hidden" name="payment" id="paymentInput">
+      <button type="submit" id="submitBtn" disabled>Submit Registration</button>
     </form>
   </section>
 
-  <button id="chat-button">💬</button>
-  <div id="chat-box">
-    <p><strong>Support:</strong> How can we help you?</p>
-    <textarea rows="3" style="width: 100%;" placeholder="Type your message..."></textarea>
-    <button style="margin-top: 10px; width: 100%;">Send</button>
-  </div>
-  
+  <script>
+    function showSportForm() {
+      document.querySelectorAll('.sport-form').forEach(div => div.style.display = 'none');
+      const selectedSport = document.getElementById('sportSelect').value;
+      if (selectedSport) {
+        document.getElementById(selectedSport).style.display = 'block';
+      }
+    }
 
-  <script src="scripts/main.js">
-    const chatButton = document.getElementById('chat-button');
-  const chatBox = document.getElementById('chat-box');
-  chatButton.onclick = () => {
-    chatBox.style.display = chatBox.style.display === 'none' || chatBox.style.display === '' ? 'block' : 'none';
-  };
+    function initiatePayment() {
+      const method = document.getElementById('paymentMethod').value;
+      if (!method) return alert('Please select a payment method.');
+
+      let url = "";
+      switch (method) {
+        case 'phonepe': url = 'https://www.phonepe.com'; break;
+        case 'gpay': url = 'https://pay.google.com'; break;
+        case 'paytm': url = 'https://paytm.com'; break;
+      }
+
+      window.open(url, '_blank');
+      document.getElementById('paymentInput').value = method + ' - PAID';
+      document.getElementById('paymentStatus').style.display = 'block';
+      document.getElementById('submitBtn').disabled = false;
+    }
+
+    function handleSubmit() {
+      if (!document.getElementById('paymentInput').value.includes('PAID')) {
+        alert("Please make payment before submitting.");
+        return false;
+      }
+      return true;
+    }
   </script>
 </body>
 </html>
