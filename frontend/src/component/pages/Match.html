@@ -1,10 +1,10 @@
-<!-- File: register.html -->
+<!-- File: match.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Allsport Hub</title>
+  <title>Friendly Match - Allsport Hub</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
@@ -22,12 +22,20 @@
   </header>
 
   <section class="login-container">
-    <h2>Create Account</h2>
-    <form action="/register" method="post">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit">Register</button>
+    <h2>Book a Friendly Match</h2>
+    <form action="/book-match" method="post">
+      <label>Choose Ground:</label>
+      <select name="ground">
+        <option value="football">Football Ground</option>
+        <option value="basketball">Basketball Court</option>
+        <option value="cricket">Cricket Pitch</option>
+      </select>
+      <label>Date:</label>
+      <input type="date" name="matchDate" required>
+      <label>Time:</label>
+      <input type="time" name="matchTime" required>
+      <input type="text" name="payment" placeholder="Payment Info">
+      <button type="submit">Book Ground</button>
     </form>
   </section>
   <button id="chat-button">💬</button>

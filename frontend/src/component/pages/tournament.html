@@ -1,0 +1,56 @@
+<!-- File: tournament.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Registration - Allsport Hub</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Allsport Hub</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="tournament.html">Tournament</a>
+      <a href="Match.html">Friendly Match</a>
+      <a href="check_match.html">Check Match</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+  </header>
+
+  <section class="login-container">
+    <h2>Register for Tournament</h2>
+    <form action="/tournament-register" method="post">
+      <label>Choose Sport:</label>
+      <select name="sport">
+        <option value="football">Football</option>
+        <option value="basketball">Basketball</option>
+        <option value="cricket">Cricket</option>
+      </select>
+      <input type="text" name="teamName" placeholder="Team Name" required>
+      <textarea name="playerDetails" placeholder="Enter player details (name, age, position...)" required></textarea>
+      <input type="text" name="payment" placeholder="Payment Info">
+      <button type="submit">Submit Registration</button>
+    </form>
+  </section>
+
+  <button id="chat-button">💬</button>
+  <div id="chat-box">
+    <p><strong>Support:</strong> How can we help you?</p>
+    <textarea rows="3" style="width: 100%;" placeholder="Type your message..."></textarea>
+    <button style="margin-top: 10px; width: 100%;">Send</button>
+  </div>
+  
+
+  <script src="scripts/main.js">
+    const chatButton = document.getElementById('chat-button');
+  const chatBox = document.getElementById('chat-box');
+  chatButton.onclick = () => {
+    chatBox.style.display = chatBox.style.display === 'none' || chatBox.style.display === '' ? 'block' : 'none';
+  };
+  </script>
+</body>
+</html>

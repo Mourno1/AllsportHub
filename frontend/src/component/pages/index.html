@@ -1,13 +1,14 @@
-<!-- File: register.html -->
+<!-- File: index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Allsport Hub</title>
+  <title>Allsport Hub - Home</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+  
   <header>
     <h1>Allsport Hub</h1>
     <nav>
@@ -21,15 +22,18 @@
     </nav>
   </header>
 
-  <section class="login-container">
-    <h2>Create Account</h2>
-    <form action="/register" method="post">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit">Register</button>
-    </form>
+  <section class="hero">
+    <h2>Welcome to AllSport Hub</h2>
+    <p>Your gateway to managing matches, scores, and more.</p>
+    <div class="btn-container">
+      <a href="login.html" class="btn">Login</a>
+      <a href="register.html" class="btn">Register</a>
+    </div>
   </section>
+
+  <footer>
+    &copy; 2025 AllSport Hub. All rights reserved.
+  </footer>
   <button id="chat-button">💬</button>
   <div id="chat-box">
     <p><strong>Support:</strong> How can we help you?</p>
@@ -39,9 +43,10 @@
   
 
   <script src="scripts/main.js">
-     const chatButton = document.getElementById('chat-button');
-  const chatBox = document.getElementById('chat-box');
-  chatButton.onclick = () => {
+
+    const chatButton = document.getElementById('chat-button');
+    const chatBox = document.getElementById('chat-box');
+    chatButton.onclick = () => {
     chatBox.style.display = chatBox.style.display === 'none' || chatBox.style.display === '' ? 'block' : 'none';
   };
   </script>
